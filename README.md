@@ -63,7 +63,7 @@ cs.cntlr.auto(tint=100)
 cs.cntlr.auto(tint='hi')
 
 # man_tint should be from 0 to 65535
-# measurement_time = tint * man_tint
+# measurement_time = tint * man_tint * 4
 cs.cntlr.auto(gain='high', man_tint=70000, tint=1)
 cs.cntlr.auto(man_tint='hi')
 ```
