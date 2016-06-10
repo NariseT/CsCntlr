@@ -1,6 +1,7 @@
 build/
 dist/
 *.egg-info
+CsCntlr.egg-info
 *.pyc
 *.pyo
 *.rst
