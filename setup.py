@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from codecs import open
 from os import path
 
-version = '0.0.5'
+version = '0.0.6'
 here = path.abspath(path.dirname(__file__))
 read_me = path.join(here, 'README.rst')
 
