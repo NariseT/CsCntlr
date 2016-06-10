@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from codecs import open
 from os import path
 
-version = '0.0.0'
+version = '0.0.3'
 here = path.abspath(path.dirname(__file__))
 read_me = path.join(here, 'README.rst')
 
@@ -45,6 +45,6 @@ setup(
 
     keywords='Color-sensor S11059-02DT Raspberry-Pi',
     packages=find_packages(exclude=['contrib', 'docs', 'tests', 'examples']),
+    install_requires=['smbus'],
     
-    install_requires=['smbus', 'abc', 'time'],
 )

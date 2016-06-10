@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: CsCntlr
-Version: 0.0.0
+Version: 0.0.2
 Summary: A python package for the color sensor S11059-02DT
 Home-page: https://github.com/NariseT/CsCntlr
 Author: Takafumi Narise
