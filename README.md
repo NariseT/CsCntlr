@@ -26,6 +26,7 @@ cs.cntlr.auto()
 # Examples for Fixed Period Mode
 
 ```
+from CsCntlr import *
 cs = CsCntlr()
 cs.useFixedPeriodMode()
 
@@ -47,6 +48,7 @@ cs.cntlr.auto(tint='hi')
 In this mode, the sensor goes to standby mode after the measurement.
 
 ```
+from CsCntlr import *
 cs = CsCntlr()
 cs.useManualSettingMode()
 
