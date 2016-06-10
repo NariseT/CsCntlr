@@ -74,6 +74,7 @@ cs.cntlr.auto(man_tint='hi')
 # Note: CsCntlr is Singleton
 
 ```
+from CsCntlr import *
 cs = CsCntlr()
 cs.useManualSettingMode()
 
