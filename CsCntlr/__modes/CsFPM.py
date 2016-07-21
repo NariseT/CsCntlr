@@ -28,7 +28,7 @@ class CsFPM(CsABC):
             measurement_time = self.TINT_3 * 4
         return measurement_time
     
-    def auto(self, gain='', tint=-1):
+    def auto(self, gain='', tint=-1, quiet=False):
         self.reset_adc_and_disable_standby_mode()
         print('\n####################')
         print(self.name)
@@ -56,9 +56,10 @@ class CsFPM(CsABC):
         time.sleep(measurement_time / 1000 * 1.5)
         #print('after')
         d = self.getData()
-        #print( 'ctrl: ' + str(bin(d['ctrl'])) )
-        print( 'red: ' + str(d['red']) )
-        print( 'green: ' + str(d['green']) )
-        print( 'blue: ' + str(d['blue']) )
-        print( 'ir: ' + str(d['ir']) )
+        if not quiet:
+            #print( 'ctrl: ' + str(bin(d['ctrl'])) )
+            print( 'red: ' + str(d['red']) )
+            print( 'green: ' + str(d['green']) )
+            print( 'blue: ' + str(d['blue']) )
+            print( 'ir: ' + str(d['ir']) )
         return d

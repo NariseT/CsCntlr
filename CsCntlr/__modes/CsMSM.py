@@ -47,7 +47,7 @@ class CsMSM(CsABC):
             measurement_time = self.TINT_3 * man_tint * 4
         return measurement_time
     
-    def auto(self, gain='', man_tint=-1, tint=-1):
+    def auto(self, gain='', man_tint=-1, tint=-1, quiet=False):
         print('\n####################')
         print(self.name)
         
@@ -79,10 +79,11 @@ class CsMSM(CsABC):
         time.sleep(measurement_time / 1000 * 1.5)
         #print('after')
         d = self.getData()
-        #print( 'ctrl: ' + str(bin(d['ctrl'])) )
-        #print( 'man_tint: ' + str(d['man_tint']) )
-        print( 'red: ' + str(d['red']) )
-        print( 'green: ' + str(d['green']) )
-        print( 'blue: ' + str(d['blue']) )
-        print( 'ir: ' + str(d['ir']) )
+        if not quiet:
+            #print( 'ctrl: ' + str(bin(d['ctrl'])) )
+            #print( 'man_tint: ' + str(d['man_tint']) )
+            print( 'red: ' + str(d['red']) )
+            print( 'green: ' + str(d['green']) )
+            print( 'blue: ' + str(d['blue']) )
+            print( 'ir: ' + str(d['ir']) )
         return d
