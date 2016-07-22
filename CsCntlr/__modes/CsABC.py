@@ -74,20 +74,22 @@ class CsABC(object):
         else:
             return False
     
-    def reset_adc(self):
+    def reset_adc(self, quiet=False):
         control_bits = self.get_ctrl_bits()
         is_adc_reseted = self.is_adc_reseted()
         if is_adc_reseted:
-            print('\nadc already reseted\n')
+            if not quiet:
+                print('\nadc already reseted\n')
         else:
             control_bits ^= self.ADC_RESET
             self.i2c_write(self.CTRL_REG, control_bits)
     
-    def run_adc(self):
+    def run_adc(self, quiet=False):
         control_bits = self.get_ctrl_bits()
         is_adc_reseted = self.is_adc_reseted()
         if not is_adc_reseted:
-            print('\nadc already running\n')
+            if not quiet:
+                print('\nadc already running\n')
         else:
             control_bits ^= self.ADC_RESET
             self.i2c_write(self.CTRL_REG, control_bits)
@@ -144,21 +146,23 @@ class CsABC(object):
         else:
             return True
     
-    def set_to_high_gain(self):
+    def set_to_high_gain(self, quiet=False):
         control_bits = self.get_ctrl_bits()
         is_high_gain_mode = self.is_high_gain_mode()
         if is_high_gain_mode:
-            print('\nalready high gain mode\n')
+            if not quiet:
+                print('\nalready high gain mode\n')
             return
         else:
             control_bits ^= self.GAIN_SELECTION
             self.i2c_write(self.CTRL_REG, control_bits)
     
-    def set_to_low_gain(self):
+    def set_to_low_gain(self, quiet=False):
         control_bits = self.get_ctrl_bits()
         is_high_gain_mode = self.is_high_gain_mode()
         if not is_high_gain_mode:
-            print('\nalready low gain mode\n')
+            if not quiet:
+                print('\nalready low gain mode\n')
             return
         else:
             control_bits ^= self.GAIN_SELECTION
@@ -189,16 +193,17 @@ class CsABC(object):
     manual setting mode:
         11: 358.4 ms, 10: 44.8 ms, 01: 2.8 ms, 00: 0.175 ms
     """
-    def set_tint(self, tint):
+    def set_tint(self, tint, quiet=False):
         if tint == 0 or tint == 1 or tint == 2 or tint == 3:
             control_bits = self.get_ctrl_bits()
             control_bits >>= 2
             control_bits = (control_bits<<2) | tint
             self.i2c_write(self.CTRL_REG, control_bits)
         else:
-            print('\ninvalid tint value: ')
-            print(tint)
-            print('tint should be from 0 to 3\n')
+            if not quiet:
+                print('\ninvalid tint value: ')
+                print(tint)
+                print('tint should be from 0 to 3\n')
     
     @abstractmethod
     def calcMeasurementTime(self):

@@ -29,30 +29,33 @@ class CsFPM(CsABC):
         return measurement_time
     
     def auto(self, gain='', tint=-1, quiet=False):
+        if not quiet:
+            print('\n####################')
+            print(self.name)
         self.reset_adc_and_disable_standby_mode()
-        print('\n####################')
-        print(self.name)
         if gain:
             if gain.lower() == 'high':
-                self.set_to_high_gain()
+                self.set_to_high_gain(quiet=quiet)
             elif gain.lower() == 'low':
-                self.set_to_low_gain()
+                self.set_to_low_gain(quiet=quiet)
             else:
-                print('\ngain shold be \'high\' or \'low\'\n')
+                if not quiet:
+                    print('\ngain shold be \'high\' or \'low\'\n')
         if not tint == -1:
-            self.set_tint(tint)
+            self.set_tint(tint, quiet=quiet)
         measurement_time = self.calcMeasurementTime()
-        print('Measurement time: ' + str(measurement_time) + ' ms\n')
-        """
-        print('before')
-        d = self.getData()
-        print( 'ctrl: ' + str(bin(d['ctrl'])) )
-        print( 'red: ' + str(d['red']) )
-        print( 'green: ' + str(d['green']) )
-        print( 'blue: ' + str(d['blue']) )
-        print( 'ir: ' + str(d['ir']) )
-        """
-        self.run_adc()
+        if not quiet:
+            print('Measurement time: ' + str(measurement_time) + ' ms\n')
+            """
+            print('before')
+            d = self.getData()
+            print( 'ctrl: ' + str(bin(d['ctrl'])) )
+            print( 'red: ' + str(d['red']) )
+            print( 'green: ' + str(d['green']) )
+            print( 'blue: ' + str(d['blue']) )
+            print( 'ir: ' + str(d['ir']) )
+            """
+        self.run_adc(quiet=quiet)
         time.sleep(measurement_time / 1000 * 1.5)
         #print('after')
         d = self.getData()
